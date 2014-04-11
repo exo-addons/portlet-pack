@@ -1,4 +1,4 @@
 portlet-pack
 ============
 
-Portlet Pack for eXo Platform 4
+Portlet pack for eXo Platform 4

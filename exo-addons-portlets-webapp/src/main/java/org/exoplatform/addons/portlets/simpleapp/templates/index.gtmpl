@@ -1,0 +1,24 @@
+<script type="text/javascript" src="/portlet-pack/js/simpleapp.js"></script>
+<% if ("true".equals(decoration)) { %>
+<div class="simpleapp-portlet">
+  <div class="simple-app-content uiBox">
+    <h6 class="title clearfix"><center>${title}</center></h6>
+<% } %>
+    <div class="simpleapp-content simpleapp-content-${id} uiContentBox" data-content-url="${html}" data-cache-sec="${cache}">
+      <div class="loading">Loading...</div>
+    </div>
+<% if ("true".equals(decoration)) { %>
+  </div>
+</div>
+<% } %>
+<script>
+  jQuery( document ).ready(function( $ ) {
+    $(".simpleapp-content").each(function () {
+      var contentUrl = $(this).attr("data-content-url");
+      var cache = Math.round($(this).attr("data-cache-sec"));
+      if (contentUrl !== undefined && contentUrl !== "default") {
+        $(this).load(contentUrl);
+      }
+    });
+  });
+</script>

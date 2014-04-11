@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+             version="2.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd
+   http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+   <portlet>
+     <portlet-name>SimpleappApplication</portlet-name>
+     <display-name xml:lang="EN">Simple app Application</display-name>
+     <portlet-class>org.exoplatform.addons.portlets.simpleapp.SimpleappPortlet</portlet-class>
+     <init-param>
+       <name>juzu.run_mode</name>
+       <value>prod</value>
+     </init-param>
+     <supports>
+       <mime-type>text/html</mime-type>
+     </supports>
+     <portlet-info>
+       <title>Simple app</title>
+       <short-title>Simple app</short-title>
+       <keywords>Content</keywords>
+     </portlet-info>
+     <portlet-preferences>
+       <preference>
+         <name>id</name>
+         <value></value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>title</name>
+         <value></value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>js</name>
+         <value>default</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>css</name>
+         <value>default</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>html</name>
+         <value>default</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>cache</name>
+         <value>60</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>decoration</name>
+         <value>true</value>
+         <read-only>false</read-only>
+       </preference>
+     </portlet-preferences>
+   </portlet>
+
+   <portlet>
+     <portlet-name>ResponsiveApplication</portlet-name>
+     <display-name xml:lang="EN">Responsive Application</display-name>
+     <portlet-class>org.exoplatform.addons.portlets.responsive.ResponsivePortlet</portlet-class>
+     <init-param>
+       <name>juzu.run_mode</name>
+       <value>prod</value>
+     </init-param>
+     <expiration-cache>0</expiration-cache>
+     <supports>
+       <mime-type>text/html</mime-type>
+     </supports>
+     <portlet-info>
+       <title>Responsive</title>
+       <short-title>Responsive</short-title>
+       <keywords>Content</keywords>
+     </portlet-info>
+   </portlet>
+
+   <portlet>
+     <portlet-name>RssApplication</portlet-name>
+     <display-name xml:lang="EN">Rss Application</display-name>
+     <portlet-class>org.exoplatform.addons.portlets.rss.RssPortlet</portlet-class>
+     <init-param>
+       <name>juzu.run_mode</name>
+       <value>prod</value>
+     </init-param>
+     <expiration-cache>0</expiration-cache>
+     <supports>
+       <mime-type>text/html</mime-type>
+     </supports>
+     <portlet-info>
+       <title>Rss</title>
+       <short-title>Rss</short-title>
+       <keywords>Content</keywords>
+     </portlet-info>
+     <portlet-preferences>
+       <preference>
+         <name>url</name>
+         <value>http://blog.exoplatform.com/en/feed</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>size</name>
+         <value>5</value>
+         <read-only>false</read-only>
+       </preference>
+       <preference>
+         <name>cache</name>
+         <value>300</value>
+         <read-only>false</read-only>
+       </preference>
+     </portlet-preferences>
+   </portlet>
+
+  <filter>
+    <filter-name>ResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.responsive.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
+  <filter>
+    <filter-name>SimpleResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.simpleapp.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ResponseFilter</filter-name>
+    <portlet-name>ResponsiveApplication</portlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>SimpleResponseFilter</filter-name>
+    <portlet-name>SimpleappApplication</portlet-name>
+  </filter-mapping>
+
+</portlet-app>
