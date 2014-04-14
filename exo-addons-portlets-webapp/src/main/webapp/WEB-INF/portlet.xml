@@ -114,6 +114,37 @@
      </portlet-preferences>
    </portlet>
 
+  <portlet>
+    <portlet-name>GoogleanalyticsApplication</portlet-name>
+    <display-name xml:lang="EN">Google analytics Application</display-name>
+    <portlet-class>org.exoplatform.addons.portlets.googleanalytics.GoogleanalyticsPortlet</portlet-class>
+    <init-param>
+      <name>juzu.run_mode</name>
+      <value>prod</value>
+    </init-param>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Google analytics</title>
+      <short-title>Google analytics</short-title>
+      <keywords>Administration</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>account</name>
+        <value>UA-XXXXX-Y</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>
+  </portlet>
+
+  <filter>
+    <filter-name>GAResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.googleanalytics.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
   <filter>
     <filter-name>ResponseFilter</filter-name>
     <filter-class>org.exoplatform.addons.portlets.responsive.ResponseFilter</filter-class>
@@ -134,6 +165,11 @@
   <filter-mapping>
     <filter-name>SimpleResponseFilter</filter-name>
     <portlet-name>SimpleappApplication</portlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>GAResponseFilter</filter-name>
+    <portlet-name>GoogleanalyticsApplication</portlet-name>
   </filter-mapping>
 
 </portlet-app>
