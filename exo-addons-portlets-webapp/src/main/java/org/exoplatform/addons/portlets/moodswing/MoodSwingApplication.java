@@ -1,4 +1,4 @@
-package org.exoplatform.addons.portlets.moody;
+package org.exoplatform.addons.portlets.moodswing;
 
 import juzu.Path;
 import juzu.Resource;
@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MoodyApplication
+public class MoodSwingApplication
 {
 
   /** . */
