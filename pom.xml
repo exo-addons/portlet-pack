@@ -11,13 +11,21 @@
   <artifactId>portlet-pack</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Portlet Pack for ExoPlatform 4</name>
-  <description>Portlet Pack for ExoPlatform 4</description>
+  <name>Portlet Pack for eXo Platform 4</name>
+  <description>Portlet Pack for eXo Platform 4</description>
   <developers>
     <developer>
       <id>benjamin.paillereau</id>
       <name>Benjamin Paillereau</name>
       <email>benjamin.paillereau@exoplatform.com</email>
+      <roles>
+        <role>Owner</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>esslem.ghodbane</id>
+      <name>Esslem Ghodbane</name>
+      <email>esslem.ghodbane@exoplatform.com</email>
       <roles>
         <role>Owner</role>
       </roles>
