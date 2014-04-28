@@ -98,6 +98,25 @@
    </portlet>
 
    <portlet>
+     <portlet-name>MapApplication</portlet-name>
+     <display-name xml:lang="EN">Map Application</display-name>
+     <portlet-class>org.exoplatform.addons.portlets.map.MapPortlet</portlet-class>
+     <init-param>
+       <name>juzu.run_mode</name>
+       <value>prod</value>
+     </init-param>
+     <expiration-cache>0</expiration-cache>
+     <supports>
+       <mime-type>text/html</mime-type>
+     </supports>
+     <portlet-info>
+       <title>Map</title>
+       <short-title>Map</short-title>
+       <keywords>Content</keywords>
+     </portlet-info>
+   </portlet>
+
+   <portlet>
      <portlet-name>ResponsiveApplication</portlet-name>
      <display-name xml:lang="EN">Responsive Application</display-name>
      <portlet-class>org.exoplatform.addons.portlets.responsive.ResponsivePortlet</portlet-class>
@@ -194,6 +213,41 @@
     <filter-class>org.exoplatform.addons.portlets.simpleapp.ResponseFilter</filter-class>
     <lifecycle>RENDER_PHASE</lifecycle>
   </filter>
+<!--
+  <filter>
+    <filter-name>MoodTrendResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.moodtrend.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
+  <filter>
+    <filter-name>MoodSwingResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.moodswing.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
+  <filter>
+    <filter-name>MapResponseFilter</filter-name>
+    <filter-class>org.exoplatform.addons.portlets.map.ResponseFilter</filter-class>
+    <lifecycle>RENDER_PHASE</lifecycle>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>MoodTrendResponseFilter</filter-name>
+    <portlet-name>MoodTrendApplication</portlet-name>
+  </filter-mapping>
+
+
+  <filter-mapping>
+    <filter-name>MoodSwingResponseFilter</filter-name>
+    <portlet-name>MoodSwingApplication</portlet-name>
+  </filter-mapping>
+
+
+  <filter-mapping>
+    <filter-name>MapResponseFilter</filter-name>
+    <portlet-name>MapApplication</portlet-name>
+  </filter-mapping>-->
 
   <filter-mapping>
     <filter-name>ResponseFilter</filter-name>
