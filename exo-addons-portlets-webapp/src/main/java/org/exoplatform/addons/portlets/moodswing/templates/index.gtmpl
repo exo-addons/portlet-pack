@@ -1,18 +1,43 @@
-<div class="moodswingPortlet">
-  <div class="moodswingPortletData uiBox">
-    <h6 class="title clearfix">
-      What's Your Mood Today?
-    </h6>
-    <div class="uiContentBox">
-      <div class="mood orange"><span class="face">:D</span></div>
-      <div class="mood green"><span class="face">:)</span></div>
-      <div class="mood blue"><span class="face">:|</span></div>
-      <div class="mood pink"><span class="face">:/</span></div>
-      <div class="mood purple"><span class="face">:(</span></div>
-    </div>
-  </div>
-</div>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<div class="ui-mood-swing-app">
+    <div class="panel panel-default">
+        <div class="panel-heading today-content"><label id="current-date"></label></div>
+        <div class="panel-body">
+            <div class="user-info">
+                <img src="images/icons/Root.png"/>
+                <label class="user-name-content">Esslem Ghodbane</label>
+            </div>
 
-<script>
-  $(".uiComposer").remove();
-</script>
+            <div class="bubble">Today, I feel <span id="mood-swing"></span>.</div>
+            <div class="icons-set">
+                <a href="#" onclick="toggleIconsPan()"><span id="editIconSpan" class="glyphicon glyphicon-edit"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-share"></span></a>
+            </div>
+            <section id="selectSection">
+                <select id="selectImage" class="image-picker show-labels show-html">
+                    <option value=""></option>
+                    <option data-img-src='images/icons/01-Happy.png'>Happy</option>
+                    <option data-img-src='images/icons/02-Unhappy.png'>Unhappy</option>
+                    <option data-img-src='images/icons/03-Crying.png'>Crying</option>
+                    <option data-img-src='images/icons/04-Angry.png'>Angry</option>
+                    <option data-img-src='images/icons/05-Pirate.png'>Pirate</option>
+                    <option data-img-src='images/icons/06-Intelligent.png'>Intelligent</option>
+                    <option data-img-src='images/icons/07-Naughty.png'>Naughty</option>
+                    <option data-img-src='images/icons/08-Blinking.png'>Blinking</option>
+                    <option data-img-src='images/icons/09-Overhappy.png'>Overhappy</option>
+                    <option data-img-src='images/icons/10-InLove.png'>InLove</option>
+                    <option data-img-src='images/icons/11-Shocked.png'>Shocked</option>
+                    <option data-img-src='images/icons/12-Kissing.png'>Kissing</option>
+                    <option data-img-src='images/icons/13-Confused.png'>Confused</option>
+                    <option data-img-src='images/icons/14-Vampire.png'>Vampire</option>
+                    <option data-img-src='images/icons/15-Silent.png'>Silent</option>
+                    <option data-img-src='images/icons/16-King.png'>King</option>
+                    <option data-img-src='images/icons/17-Thief.png'>Thief</option>
+                    <option data-img-src='images/icons/18-Toothy.png'>Toothy</option>
+                    <option data-img-src='images/icons/19-Sleepy.png'>Sleepy</option>
+                    <option data-img-src='images/icons/20-Sealed.png'>Sealed</option>
+                </select>
+            </section>
+        </div>
+    </div>
+</div>

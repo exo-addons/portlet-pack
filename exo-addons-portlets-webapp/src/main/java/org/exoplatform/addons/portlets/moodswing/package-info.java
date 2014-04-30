@@ -1,8 +1,7 @@
 @Assets(
         location = AssetLocation.SERVER,
         scripts = {
-                @Script(src = "js/Chart.min.js", id = "chart"),
-                @Script(src = "js/moodswing.js", id = "moodswing", depends = "chart")
+                @Script(src = "js/image-picker.js", id = "imagePicker")
         },
         stylesheets = {
                 @Stylesheet(src = "/org/exoplatform/addons/portlets/moodswing/assets/moodswing.css", location = AssetLocation.APPLICATION)
