@@ -1,14 +1,60 @@
-<div class="moodtrendPortlet">
-  <div class="moodtrendPortletData uiBox">
-    <h6 class="title clearfix">
-      Mood Trend
-    </h6>
-    <div class="uiContentBox">
-      <div class="mood-trend percent100 orange"><span class="face">:D</span></div>
-      <div class="mood-trend percent60 green"><span class="face">:)</span></div>
-      <div class="mood-trend blue"><span class="face">:|</span></div>
-      <div class="mood-trend percent40 pink"><span class="face">:/</span></div>
-      <div class="mood-trend percent20 purple"><span class="face">:(</span></div>
-    </div>
-  </div>
-</div>
+<script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Todays Mood Trend'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Mood Trend',
+                data: [
+                    ['Happy', 12.0],
+                    ['Unhappy', 45.0],
+                    ['Crying', 45.0],
+                    ['Angry', 3.0],
+                    ['Pirate', 8.0],
+                    ['Intelligent', 45.0],
+                    ['Naughty', 15.0],
+                    ['Blinking', 22.0],
+                    ['Overhappy', 14.0],
+                    ['InLove', 10.8], {
+                        name: 'Shocked',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    }, ['Kissing', 8.5],
+                    ['Confused', 6.2],
+                    ['Vampire', 6.2],
+                    ['Silent', 6.2],
+                    ['King', 6.2],
+                    ['Thief', 6.2],
+                    ['Toothy', 6.2],
+                    ['Sleepy', 6.2],
+                    ['Sealed', 0.7]
+                ]
+            }]
+        });
+    });
+</script>
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>

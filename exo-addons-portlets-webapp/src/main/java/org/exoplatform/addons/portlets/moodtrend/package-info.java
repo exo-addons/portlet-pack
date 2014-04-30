@@ -1,8 +1,8 @@
 @Assets(
         location = AssetLocation.SERVER,
         scripts = {
-                @Script(src = "js/Chart.min.js", id = "chart"),
-                @Script(src = "js/moodtrend.js", id = "moodtrend", depends = "chart")
+                @Script(src = "js/highcharts.js", id = "highcharts"),
+                @Script(src = "js/exporting.js", id = "exporting")
         },
         stylesheets = {
                 @Stylesheet(src = "/org/exoplatform/addons/portlets/moodtrend/assets/moodtrend.css", location = AssetLocation.APPLICATION)
