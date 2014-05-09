@@ -75,6 +75,12 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.addons.demo</groupId>
+        <artifactId>exo-addons-demo-extension-webapp</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.addons.demo</groupId>
         <artifactId>exo-addons-demo-extension-config</artifactId>
         <version>${project.version}</version>
         <type>jar</type>

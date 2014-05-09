@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2003-2014 eXo Platform SAS.
+
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 3 of
+    the License, or (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
              version="2.0"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -59,6 +79,26 @@
      </portlet-preferences>
    </portlet>
 
+    <portlet>
+        <portlet-name>SampleApplication</portlet-name>
+        <display-name xml:lang="EN">Sample Application</display-name>
+        <portlet-class>org.exoplatform.addons.portlets.sample.SamplePortlet</portlet-class>
+        <init-param>
+            <name>juzu.run_mode</name>
+            <value>prod</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <portlet-info>
+            <title>Sample</title>
+            <short-title>Sample</short-title>
+            <keywords>Content</keywords>
+        </portlet-info>
+    </portlet>
+
+
    <portlet>
      <portlet-name>MoodSwingApplication</portlet-name>
      <display-name xml:lang="EN">Mood Swing Application</display-name>
@@ -93,25 +133,6 @@
      <portlet-info>
        <title>Mood Trend</title>
        <short-title>Mood Trend</short-title>
-       <keywords>Content</keywords>
-     </portlet-info>
-   </portlet>
-
-   <portlet>
-     <portlet-name>MapApplication</portlet-name>
-     <display-name xml:lang="EN">Map Application</display-name>
-     <portlet-class>org.exoplatform.addons.portlets.map.MapPortlet</portlet-class>
-     <init-param>
-       <name>juzu.run_mode</name>
-       <value>prod</value>
-     </init-param>
-     <expiration-cache>0</expiration-cache>
-     <supports>
-       <mime-type>text/html</mime-type>
-     </supports>
-     <portlet-info>
-       <title>Map</title>
-       <short-title>Map</short-title>
        <keywords>Content</keywords>
      </portlet-info>
    </portlet>
