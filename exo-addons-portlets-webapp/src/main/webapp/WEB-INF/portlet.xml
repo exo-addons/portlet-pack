@@ -198,6 +198,49 @@
     </portlet-preferences>
   </portlet>
 
+  <portlet>
+    <portlet-name>GeolocApplication</portlet-name>
+    <display-name xml:lang="EN">Geolocalization Application</display-name>
+    <portlet-class>org.exoplatform.addons.portlets.geoloc.GeolocPortlet</portlet-class>
+    <init-param>
+      <name>juzu.run_mode</name>
+      <value>prod</value>
+    </init-param>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Geoloc</title>
+      <short-title>Geoloc</short-title>
+      <keywords>Administration</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>id</name>
+        <value>XXXXX</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>
+  </portlet>
+
+  <portlet>
+    <portlet-name>FavoritesApplication</portlet-name>
+    <display-name xml:lang="EN">Favorites Application</display-name>
+    <portlet-class>org.exoplatform.addons.portlets.favorites.FavoritesPortlet</portlet-class>
+    <init-param>
+      <name>juzu.run_mode</name>
+      <value>prod</value>
+    </init-param>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Favorites</title>
+      <short-title>Favorites</short-title>
+      <keywords>Administration</keywords>
+    </portlet-info>
+  </portlet>
+
   <filter>
     <filter-name>GAResponseFilter</filter-name>
     <filter-class>org.exoplatform.addons.portlets.googleanalytics.ResponseFilter</filter-class>

@@ -1,0 +1,82 @@
+
+<style type="text/css">
+  #map-canvas { height: 240px; width: 285px; }
+  .gmnoprint img { max-width: none; }
+  .geoloc-box {width: 285px; }
+  .geoloc-content {padding: 0!important;}
+</style>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript">
+  var latitude;
+  var longitude;
+
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(latitude, longitude);
+
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 4
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    var image = '/portlet-pack/images/exoerflag.png';
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello eXoer!',
+      icon: image
+    });
+
+  }
+
+  (function($) {
+
+    $(document).ready(function() {
+
+      var $geolocApp = $("#geoloc-portlet");
+      var jzSetGeolocURL = $geolocApp.jzURL("Controller.setGeoloc");
+
+
+      $.getJSON("http://smart-ip.net/geoip-json?callback=?",
+        function (data) {
+          console.log("country   : "+data.countryName);
+          console.log("code      : "+data.countryCode);
+          console.log("latitude  : "+data.latitude);
+          console.log("longitude : "+data.longitude);
+          latitude = data.latitude;
+          longitude = data.longitude;
+          google.maps.event.addDomListener(window, 'load', initialize);
+
+          $.ajax({
+            url: jzSetGeolocURL,
+            data: { "latitude": data.latitude,
+                    "longitude": data.longitude,
+                    "country": data.countryName,
+                    "code": data.countryCode
+            },
+            success: function(response){
+              console.log("SUCCESS:setGeoloc::"+response);
+            },
+            error: function(response){
+              console.log("ERROR:setGeoloc::"+response);
+            }
+
+          });
+
+
+        }
+      );
+    });
+
+  })(jQuery);
+
+</script>
+
+<div id="geoloc-portlet">
+  <div class="geoloc-box uiBox">
+    <h6 class="title clearfix"><center>My Position</center></h6>
+    <div class="geoloc-content uiContentBox">
+      <div id="map-canvas"/>
+    </div>
+  </div>
+</div>
