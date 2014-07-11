@@ -1,0 +1,198 @@
+<style type="text/css">
+  .FavoritesApplicationTDContainer {
+    float: right!important;
+  }
+  .uiDropdownWithIcon .dropdown-menu li>a {
+    padding: 5px 10px 5px 9px;
+  }
+</style>
+<script type="text/javascript">
+
+function Favorites() {
+  this.currentTitle = "";
+  this.currentUrl = "";
+  this.favorites = [];
+  this.jzAddFavorite = "";
+  this.jzGetFavorites = "";
+  this.jzDeleteFavorite = "";
+
+}
+
+Favorites.prototype.init = function(jzAddFavorite, jzGetFavorites, jzDeleteFavorite) {
+  this.jzAddFavorite = jzAddFavorite;
+  this.jzGetFavorites = jzGetFavorites;
+  this.jzDeleteFavorite = jzDeleteFavorite;
+  this.overridePageTitle();
+};
+
+Favorites.prototype.overridePageTitle = function() {
+  var title = document.title;
+  var $breadcrumb = jqchat("ul.breadcrumb > li.active");
+  if ($breadcrumb.length > 0) {
+    title = $breadcrumb.html();
+  }
+  $breadcrumb = jqchat("ul.breadcrumb > li.active > a");
+  if ($breadcrumb.length > 0) {
+    title = $breadcrumb.html();
+  }
+  var $path = jqchat("#address");
+  if ($path.length > 0) {
+    title = $path.val();
+  }
+  this.currentTitle = title;
+  this.currentUrl = location.href;
+};
+
+
+Favorites.prototype.addFavorite = function() {
+
+  jqchat.ajax({
+    url: this.jzAddFavorite,
+    data: {
+      "title": this.currentTitle,
+      "url": this.currentUrl
+    },
+    dataType: "json",
+    context: this,
+    success: function(data){
+      console.log("Favorite added with: title="+this.currentTitle+" ; url="+this.contentUrl);
+    },
+    error: function () {
+      console.log("Error when saving favorite");
+    }
+  });
+
+};
+
+Favorites.prototype.deleteFavorite = function(uuid) {
+
+  jqchat.ajax({
+    url: this.jzDeleteFavorite,
+    data: {
+      "uuid": uuid
+    },
+    dataType: "json",
+    context: this,
+    success: function(data){
+      console.log("Favorite deleted with: uuid="+uuid);
+    },
+    error: function () {
+      console.log("Error when deleting favorite");
+    }
+  });
+
+};
+
+Favorites.prototype.getFavorites = function(callback) {
+
+  jqchat.ajax({
+    url: this.jzGetFavorites,
+    dataType: "json",
+    context: this,
+    success: function(data){
+      this.favorites = data.favorites;
+      console.log("you have "+this.favorites.length+" favorites");
+      if (typeof callback === "function") {
+        callback(this.favorites, this);
+      }
+    },
+    error: function () {
+      console.log("Error when getting favorites");
+    }
+  });
+
+};
+
+Favorites.prototype.loadFavorites = function(idDom) {
+  var $container = jqchat(idDom);
+  var html = "";
+  this.getFavorites(function(myfavorites, context) {
+
+    if (myfavorites.length>0) {
+      for (var i=0 ; i<myfavorites.length ; i++) {
+        var favorite = myfavorites[i];
+        html += "<li><a href='"+favorite.url+"'><i class='"+context.getIcon(favorite.url)+"'></i>"+favorite.title;
+        html += "<span class='actionHover' href='#' style='float:right;'><button class='btn btn-mini btn-delete-favorite' type='button' style='font-weight: bold' data-uuid='"+favorite.id+"'>X</button></span>";
+        html += "</a></li>";
+
+      }
+      html += "<li class='divider'>&nbsp;</li>";
+    }
+    $container.html(html);
+
+    jqchat(".btn-delete-favorite").on("click", function(e) {
+      var uuid = $(this).attr("data-uuid");
+      favorites.deleteFavorite(uuid);
+      e.preventDefault();
+    })
+
+  });
+
+};
+
+Favorites.prototype.getIcon = function (url) {
+  var appIcon = "uiIconFile";
+  if (url.indexOf("/wiki")>0) {
+    appIcon = "uiIconWiki";
+  } else if (url.indexOf("/forum")>0) {
+    appIcon = "uiIconUIForms";
+  } else if (url.indexOf("/connexions")>0) {
+    appIcon = "uiIconUser";
+  } else if (url.indexOf("/documents")>0) {
+    appIcon = "uiIconPLFDocuments";
+  } else if (url.indexOf("/home")>0) {
+    appIcon = "uiIconHome";
+  }
+
+  return appIcon;
+
+}
+
+
+var favorites = new Favorites();
+
+
+(function($) {
+
+
+  $(document).ready(function() {
+    var $favoritesApp = $("#favorites-portlet");
+    var jzAddFavorite = $favoritesApp.jzURL("Controller.addFavorite");
+    var jzGetFavorites = $favoritesApp.jzURL("Controller.getFavorites");
+    var jzDeleteFavorite = $favoritesApp.jzURL("Controller.deleteFavorite");
+
+    favorites.init(jzAddFavorite, jzGetFavorites, jzDeleteFavorite);
+
+    $(".favorites-add-link").on("click", function() {
+      favorites.addFavorite();
+    });
+
+    $("#favorites-portlet").on("click", function() {
+
+      favorites.loadFavorites("#bookmarks-details");
+
+    });
+
+  });
+
+})(jqchat);
+
+
+</script>
+
+<div id="favorites-portlet" class="uiDropdownWithIcon dropdown pull-right">
+  <a class="dropdown-toggle" data-toggle="dropdown">
+    <div class="uiFavoritesIcon" style="font-size: 26px">
+      &#9733;
+    </div>
+  </a>
+  <ul class="dropdown-menu" style="min-width: 250px;">
+    <div id="bookmarks-details">
+      <span class="bookmarks-loading no-user-selection">Loading...</span>
+      <li class="divider">&nbsp;</li>
+    </div>
+    <li>
+      <a href="#" class="favorites-add-link">&#9733; Add to favorites</a>
+    </li>
+  </ul>
+</div>
