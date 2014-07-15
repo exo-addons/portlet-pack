@@ -35,10 +35,6 @@ Favorites.prototype.overridePageTitle = function() {
   if ($breadcrumb.length > 0) {
     title = $breadcrumb.html();
   }
-  var $path = jqchat("#address");
-  if ($path.length > 0) {
-    title = $path.val();
-  }
   this.currentTitle = title;
   this.currentUrl = location.href;
 };
@@ -111,8 +107,8 @@ Favorites.prototype.loadFavorites = function(idDom) {
     if (myfavorites.length>0) {
       for (var i=0 ; i<myfavorites.length ; i++) {
         var favorite = myfavorites[i];
-        html += "<li><a href='"+favorite.url+"'><i class='"+context.getIcon(favorite.url)+"'></i>"+favorite.title;
-        html += "<span class='actionHover' href='#' style='float:right;'><button class='btn btn-mini btn-delete-favorite' type='button' style='font-weight: bold' data-uuid='"+favorite.id+"'>X</button></span>";
+        html += "<li><a href='"+favorite.url+"' class='hover-action' style='line-height:22px;'><i class='"+context.getIcon(favorite.url)+"'></i>"+favorite.title;
+        html += "<span class='actionHover' href='#' style='float:right;display:none;'><button class='btn btn-mini btn-delete-favorite' type='button' style='font-weight: bold;vertical-align: top;' data-uuid='"+favorite.id+"'>X</button></span>";
         html += "</a></li>";
 
       }
@@ -125,6 +121,14 @@ Favorites.prototype.loadFavorites = function(idDom) {
       favorites.deleteFavorite(uuid);
       e.preventDefault();
     })
+
+    jqchat("a.hover-action").hover(
+      function() {
+        $(this).children("span.actionHover").show();
+      }, function() {
+        $(this).children("span.actionHover").hide();
+      }
+    );
 
   });
 
@@ -186,7 +190,7 @@ var favorites = new Favorites();
       &#9733;
     </div>
   </a>
-  <ul class="dropdown-menu" style="min-width: 250px;">
+  <ul class="dropdown-menu" style="min-width: 270px;">
     <div id="bookmarks-details">
       <span class="bookmarks-loading no-user-selection">Loading...</span>
       <li class="divider">&nbsp;</li>
