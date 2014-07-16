@@ -2,8 +2,8 @@
   .FavoritesApplicationTDContainer {
     float: right!important;
   }
-  .uiDropdownWithIcon .dropdown-menu li>a {
-    padding: 5px 10px 5px 9px;
+  #favorites-portlet .dropdown-menu li>a {
+    padding: 5px 5px 5px 9px;
   }
 </style>
 <script type="text/javascript">
