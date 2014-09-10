@@ -241,6 +241,31 @@
     </portlet-info>
   </portlet>
 
+  <portlet>
+    <portlet-name>QuicklookApplication</portlet-name>
+    <display-name xml:lang="EN">Quick Look Application</display-name>
+    <portlet-class>org.exoplatform.addons.portlets.quicklook.QuicklookPortlet</portlet-class>
+    <init-param>
+      <name>juzu.run_mode</name>
+      <value>prod</value>
+    </init-param>
+    <supports>
+      <mime-type>text/html</mime-type>
+    </supports>
+    <portlet-info>
+      <title>Quick Look Spaces</title>
+      <short-title>Quick Look Spaces</short-title>
+      <keywords>Social</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>app</name>
+        <value>Wiki</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>
+  </portlet>
+
   <filter>
     <filter-name>GAResponseFilter</filter-name>
     <filter-class>org.exoplatform.addons.portlets.googleanalytics.ResponseFilter</filter-class>

@@ -128,6 +128,11 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.forum</groupId>
+      <artifactId>forum-answer-service</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.forum</groupId>
       <artifactId>forum-poll-service</artifactId>
       <scope>provided</scope>
     </dependency>

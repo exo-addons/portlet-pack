@@ -1,0 +1,176 @@
+<style type="text/css">
+  .quickview-box {
+    margin: 20px 20px 0 0;
+  }
+  .link-right {
+    float: right;
+  }
+</style>
+<script type="text/javascript">
+
+function Quickview() {
+  this.jzGetWikiPages = "";
+  this.jzGetForumTopics = "";
+  this.jzGetQuestions = "";
+
+}
+
+Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetQuestions) {
+  this.jzGetWikiPages = jzGetWikiPages;
+  this.jzGetForumTopics = jzGetForumTopics;
+  this.jzGetQuestions = jzGetQuestions;
+};
+
+Quickview.prototype.getWikiPages = function(callback) {
+
+  jqchat.ajax({
+    url: this.jzGetWikiPages,
+    dataType: "json",
+    context: this,
+    success: function(data){
+      this.wikiPages = data.pages;
+      console.log("you have "+this.wikiPages.length+" pages");
+      if (typeof callback === "function") {
+        callback(this.wikiPages, this);
+      }
+    },
+    error: function () {
+      console.log("Error when getting wiki pages");
+    }
+  });
+
+};
+
+Quickview.prototype.getForumTopics = function(callback) {
+
+  jqchat.ajax({
+    url: this.jzGetForumTopics,
+    dataType: "json",
+    context: this,
+    success: function(data){
+      this.forumTopics = data.topics;
+      console.log("you have "+this.forumTopics.length+" topics");
+      if (typeof callback === "function") {
+        callback(this.forumTopics, this);
+      }
+    },
+    error: function () {
+      console.log("Error when getting forum topics");
+    }
+  });
+
+};
+
+Quickview.prototype.getQuestions = function(callback) {
+
+  jqchat.ajax({
+    url: this.jzGetQuestions,
+    dataType: "json",
+    context: this,
+    success: function(data){
+      this.questions = data.questions;
+      console.log("you have "+this.questions.length+" questions");
+      if (typeof callback === "function") {
+        callback(this.questions, this);
+      }
+    },
+    error: function () {
+      console.log("Error when getting faq questions");
+    }
+  });
+
+};
+
+
+var quickview = new Quickview();
+
+
+(function($) {
+
+
+  $(document).ready(function() {
+    var $quickviewApp = $("#quickview-portlet-${title}");
+    var jzGetWikiPages = $quickviewApp.jzURL("Controller.getWikiPages");
+    var jzGetForumTopics = $quickviewApp.jzURL("Controller.getForumTopics");
+    var jzGetQuestions = $quickviewApp.jzURL("Controller.getQuestions");
+
+    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetQuestions);
+
+    var title = "${title}";
+
+
+    if (title === "Wiki") {
+      quickview.getWikiPages(function (data){
+        console.log(data);
+        var $content = $("#quickview-content-"+title);
+
+        if (data.length>0) {
+          var html = "";
+          for (var i=0 ; i<data.length ; i++) {
+            var page = data[i];
+            html += "<li><a href='"+page.url+"' class='hover-action' style='line-height:22px;'>"+page.title;
+            html += "</a></li>";
+
+          }
+          html += "<a class='link-right' href='"+document.location.href+"/wiki'>Voir plus</a>";
+          $content.html(html);
+        }
+      });
+
+    }
+    else if (title === "Forum") {
+
+      quickview.getForumTopics(function (data){
+        console.log(data);
+        var $content = $("#quickview-content-"+title);
+
+        if (data.length>0) {
+          var html = "";
+          for (var i=0 ; i<data.length ; i++) {
+            var topic = data[i];
+            html += "<li><a href='"+topic.uri+"' class='hover-action' style='line-height:22px;'>"+topic.topicName;
+            html += "</a></li>";
+
+          }
+          html += "<a class='link-right' href='"+document.location.href+"/forum'>Voir plus</a>";
+          $content.html(html);
+        }
+      });
+
+    }
+    else if (title === "FAQ") {
+
+      quickview.getQuestions(function (data){
+        console.log(data);
+        var $content = $("#quickview-content-"+title);
+
+        if (data.length>0) {
+          var html = "";
+          for (var i=0 ; i<data.length ; i++) {
+            var question = data[i];
+            html += "<li><a href='"+question.uri+"' class='hover-action' style='line-height:22px;'>"+question.question;
+            html += "</a></li>";
+
+          }
+          html += "<a class='link-right' href='"+document.location.href+"/answer'>Voir plus</a>";
+          $content.html(html);
+        }
+      });
+
+    }
+
+
+  });
+
+})(jqchat);
+
+
+</script>
+
+<div id="quickview-portlet-${title}">
+  <div class="quickview-box uiBox">
+    <h6 id="quickview-title-${title}" class="title clearfix"><center>${title}</center></h6>
+    <div id="quickview-content-${title}" class="uiContentBox">
+    </div>
+  </div>
+</div>
