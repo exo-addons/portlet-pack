@@ -22,6 +22,7 @@ import juzu.*;
 import juzu.plugin.ajax.Ajax;
 import juzu.template.Template;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
+import org.exoplatform.calendar.service.CalendarEvent;
 import org.exoplatform.faq.service.Question;
 import org.exoplatform.forum.service.Topic;
 import org.exoplatform.portal.webui.util.Util;
@@ -97,6 +98,17 @@ public class Controller
 
     return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
   }
+    @Ajax
+    @Resource
+    public Response.Content getEvents()
+    {
+
+        List<CalendarEvent> events = quicklookData_.getEvents();
+
+        String jsonEvents = getCalendarEventsToJson(events);
+
+        return Response.ok(jsonEvents).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
+    }
 
 
 
@@ -166,6 +178,30 @@ public class Controller
     sQuestions.append("]}");
     return sQuestions.toString();
   }
+
+    private String getCalendarEventsToJson(List<CalendarEvent> events)
+    {
+        StringBuilder sEvents = new StringBuilder();
+        sEvents.append("{ \"events\": [");
+
+        boolean first=true;
+        for (CalendarEvent event:events)
+        {
+            if (!first) sEvents.append(",");
+            first = false;
+
+            if (!event.getEventState().equalsIgnoreCase(CalendarEvent.COMPLETED)) {
+                sEvents.append("{\"calendarId\":\"").append(event.getCalendarId()).append("\",");
+                sEvents.append("\"type\":\"").append(event.getEventType()).append("\",");
+                sEvents.append("\"url\":\"").append("/portal/intranet/calendar/details/").append(event.getId()).append("\",");
+                sEvents.append("\"titre\":\"").append(event.getSummary()).append("\"}");
+            }
+
+        }
+
+        sEvents.append("]}");
+        return sEvents.toString();
+    }
 
 
 

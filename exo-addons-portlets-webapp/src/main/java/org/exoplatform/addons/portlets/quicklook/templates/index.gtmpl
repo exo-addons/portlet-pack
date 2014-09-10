@@ -12,13 +12,15 @@ function Quickview() {
   this.jzGetWikiPages = "";
   this.jzGetForumTopics = "";
   this.jzGetQuestions = "";
+    this.jzGetEvents = "";
 
 }
 
-Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetQuestions) {
+Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetQuestions, jzGetEvents) {
   this.jzGetWikiPages = jzGetWikiPages;
   this.jzGetForumTopics = jzGetForumTopics;
   this.jzGetQuestions = jzGetQuestions;
+    this.jzGetEvents = jzGetEvents;
 };
 
 Quickview.prototype.getWikiPages = function(callback) {
@@ -80,6 +82,25 @@ Quickview.prototype.getQuestions = function(callback) {
   });
 
 };
+Quickview.prototype.getEvents = function(callback) {
+
+    jqchat.ajax({
+        url: this.jzGetEvents,
+        dataType: "json",
+        context: this,
+        success: function(data){
+            this.events = data.events;
+            console.log("you have "+this.events.length+" events");
+            if (typeof callback === "function") {
+                callback(this.events, this);
+            }
+        },
+        error: function () {
+            console.log("Error when getting calendar events");
+        }
+    });
+
+};
 
 
 var quickview = new Quickview();
@@ -93,8 +114,9 @@ var quickview = new Quickview();
     var jzGetWikiPages = $quickviewApp.jzURL("Controller.getWikiPages");
     var jzGetForumTopics = $quickviewApp.jzURL("Controller.getForumTopics");
     var jzGetQuestions = $quickviewApp.jzURL("Controller.getQuestions");
+      var jzGetEvents = $quickviewApp.jzURL("Controller.getEvents");
 
-    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetQuestions);
+    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetQuestions, jzGetEvents );
 
     var title = "${title}";
 
@@ -148,14 +170,34 @@ var quickview = new Quickview();
           var html = "";
           for (var i=0 ; i<data.length ; i++) {
             var question = data[i];
-            html += "<li><a href='"+question.uri+"' class='hover-action' style='line-height:22px;'>"+question.question;
+            html += "<li><a href='"+question.uri+"' class='hover-action' style='line-height:22px;'>"+events.titre;
             html += "</a></li>";
 
           }
-          html += "<a class='link-right' href='"+document.location.href+"/answer'>Voir plus</a>";
+          html += "<a class='link-right' href='"+document.location.href+"/faq'>Voir plus</a>";
           $content.html(html);
         }
       });
+
+    }
+    else if (title === "Agenda") {
+
+        quickview.getEvents(function (data){
+            console.log(data);
+            var $content = $("#quickview-content-"+title);
+
+            if (data.length>0) {
+                var html = "";
+                for (var i=0 ; i<data.length ; i++) {
+                    var events = data[i];
+                    html += "<li><a href='"+events.url+"' class='hover-action' style='line-height:22px;'>"+events.titre;
+                    html += "</a></li>";
+
+                }
+                html += "<a class='link-right' href='"+document.location.href+"/calendar'>Voir plus</a>";
+                $content.html(html);
+            }
+        });
 
     }
 

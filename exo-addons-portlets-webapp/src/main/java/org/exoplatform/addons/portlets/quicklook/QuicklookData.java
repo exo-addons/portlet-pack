@@ -3,12 +3,15 @@ package org.exoplatform.addons.portlets.quicklook;
 
 import juzu.SessionScoped;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
-import org.exoplatform.faq.service.*;
+import org.exoplatform.calendar.service.CalendarEvent;
+import org.exoplatform.calendar.service.CalendarService;
+import org.exoplatform.calendar.service.impl.JCRDataStorage;
 import org.exoplatform.faq.service.DataStorage;
+import org.exoplatform.faq.service.*;
 import org.exoplatform.forum.common.jcr.KSDataLocation;
 import org.exoplatform.forum.common.jcr.PropertyReader;
-import org.exoplatform.forum.service.*;
 import org.exoplatform.forum.service.Category;
+import org.exoplatform.forum.service.*;
 import org.exoplatform.forum.service.Utils;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.util.Util;
@@ -37,11 +40,13 @@ public class QuicklookData {
   SpaceService spaceService_;
   FAQService faqService_;
   DataStorage dataStorage_;
+    CalendarService calendarService_;
+    org.exoplatform.calendar.service.DataStorage storage_;
 
 
 
   @Inject
-  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService, FAQService faqService, DataStorage dataStorage)
+  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService, FAQService faqService, DataStorage dataStorage,CalendarService calendarService,org.exoplatform.calendar.service.DataStorage jcrDataStorage)
   {
     forumService_ = forumService;
     wikiService_ = wikiService;
@@ -49,6 +54,8 @@ public class QuicklookData {
     spaceService_ = spaceService;
     faqService_ = faqService;
     dataStorage_ = dataStorage;
+      calendarService_ = calendarService;
+      storage_  = jcrDataStorage;
   }
 
   protected List<WikiPage> getWikiTopLevel()
@@ -222,5 +229,31 @@ public class QuicklookData {
 
     return null;
   }
+    protected List<CalendarEvent> getEvents() {
+
+        List<CalendarEvent> calendarEvents = null;
+        StringBuffer calednarId = new StringBuffer();
+
+        try {
+            //--- Get the current Space
+            String spaceApp = getSpace();
+            calednarId.append(spaceApp);
+
+            //--- Compute the calendar Ids
+            List<String> calendarIds = new ArrayList<String>();
+            calednarId.append("_space_calendar");
+            calendarIds.add(calednarId.toString());
+
+            calendarEvents = storage_.getGroupEventByCalendar(calendarIds);
+
+
+        } catch (Exception E) {
+            E.printStackTrace();
+            return calendarEvents;
+        }
+
+        return calendarEvents;
+
+    }
 
 }
