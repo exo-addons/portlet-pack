@@ -30,7 +30,10 @@ import org.exoplatform.portal.webui.util.Util;
 import javax.inject.Inject;
 import javax.portlet.PortletPreferences;
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /** @author <a href="mailto:benjamin.paillereau@exoplatform.com">Benjamin Paillereau</a> */
 @SessionScoped
@@ -181,6 +184,9 @@ public class Controller
 
     private String getCalendarEventsToJson(List<CalendarEvent> events)
     {
+
+        Locale locale =  Util.getPortalRequestContext().getLocale();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm",locale);
         StringBuilder sEvents = new StringBuilder();
         sEvents.append("{ \"events\": [");
 
@@ -191,8 +197,8 @@ public class Controller
             first = false;
 
             if (!event.getEventState().equalsIgnoreCase(CalendarEvent.COMPLETED)) {
-                sEvents.append("{\"calendarId\":\"").append(event.getCalendarId()).append("\",");
-                sEvents.append("\"type\":\"").append(event.getEventType()).append("\",");
+                sEvents.append("{\"from\":\"").append(dateFormat.format(event.getFromDateTime())).append("\",");
+                sEvents.append("\"to\":\"").append(dateFormat.format(event.getToDateTime())).append("\",");
                 sEvents.append("\"url\":\"").append("/portal/intranet/calendar/details/").append(event.getId()).append("\",");
                 sEvents.append("\"titre\":\"").append(event.getSummary()).append("\"}");
             }
