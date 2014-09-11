@@ -190,7 +190,7 @@ var quickview = new Quickview();
                 var html = "";
                 for (var i=0 ; i<data.length ; i++) {
                     var events = data[i];
-                    html += "<li><a href='"+events.url+"' class='hover-action' style='line-height:22px;'>"+events.titre;
+                    html += "<li><a href='"+document.location.href+""+events.url+"' class='hover-action' style='line-height:22px;'>"+events.titre;
                     html += "<span style='text-align:right;color:green;'> : "+events.from+" ==> "+events.to+"</span>";
                     html += "</a></li>";
 

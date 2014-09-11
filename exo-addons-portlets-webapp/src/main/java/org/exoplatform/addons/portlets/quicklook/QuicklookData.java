@@ -41,12 +41,11 @@ public class QuicklookData {
   FAQService faqService_;
   DataStorage dataStorage_;
     CalendarService calendarService_;
-    org.exoplatform.calendar.service.DataStorage storage_;
 
 
 
   @Inject
-  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService, FAQService faqService, DataStorage dataStorage,CalendarService calendarService,org.exoplatform.calendar.service.DataStorage jcrDataStorage)
+  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService, FAQService faqService, DataStorage dataStorage,CalendarService calendarService)
   {
     forumService_ = forumService;
     wikiService_ = wikiService;
@@ -55,7 +54,6 @@ public class QuicklookData {
     faqService_ = faqService;
     dataStorage_ = dataStorage;
       calendarService_ = calendarService;
-      storage_  = jcrDataStorage;
   }
 
   protected List<WikiPage> getWikiTopLevel()
@@ -244,7 +242,7 @@ public class QuicklookData {
             calednarId.append("_space_calendar");
             calendarIds.add(calednarId.toString());
 
-            calendarEvents = storage_.getGroupEventByCalendar(calendarIds);
+            calendarEvents = calendarService_.getGroupEventByCalendar(calendarIds);
 
 
         } catch (Exception E) {

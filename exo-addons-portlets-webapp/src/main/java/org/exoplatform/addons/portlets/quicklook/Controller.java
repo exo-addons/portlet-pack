@@ -199,7 +199,7 @@ public class Controller
             if (!event.getEventState().equalsIgnoreCase(CalendarEvent.COMPLETED)) {
                 sEvents.append("{\"from\":\"").append(dateFormat.format(event.getFromDateTime())).append("\",");
                 sEvents.append("\"to\":\"").append(dateFormat.format(event.getToDateTime())).append("\",");
-                sEvents.append("\"url\":\"").append("/portal/intranet/calendar/details/").append(event.getId()).append("\",");
+                sEvents.append("\"url\":\"").append("/calendar/details/").append(event.getId()).append("\",");
                 sEvents.append("\"titre\":\"").append(event.getSummary()).append("\"}");
             }
 
