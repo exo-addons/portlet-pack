@@ -1,0 +1,10 @@
+<div class="myCRMPortlet" id="myCRMPortlet">
+	<div class="uiBox">
+		<h6 class="title clearfix">
+        My CRM
+		</h6>
+		<div class="uiContentBox">
+            <div><span>Hello Word</span></div>
+		</div>
+	</div>
+</div>
