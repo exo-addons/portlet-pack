@@ -37,21 +37,21 @@
       var jzSetGeolocURL = $geolocApp.jzURL("Controller.setGeoloc");
 
 
-      $.getJSON("http://smart-ip.net/geoip-json?callback=?",
+      $.getJSON("http://ip-api.com/json/?callback=?",
         function (data) {
-          console.log("country   : "+data.countryName);
+          console.log("country   : "+data.country);
           console.log("code      : "+data.countryCode);
-          console.log("latitude  : "+data.latitude);
-          console.log("longitude : "+data.longitude);
-          latitude = data.latitude;
-          longitude = data.longitude;
+          console.log("latitude  : "+data.lat);
+          console.log("longitude : "+data.lon);
+          latitude = data.lat;
+          longitude = data.lon;
           google.maps.event.addDomListener(window, 'load', initialize);
 
           $.ajax({
             url: jzSetGeolocURL,
-            data: { "latitude": data.latitude,
-                    "longitude": data.longitude,
-                    "country": data.countryName,
+            data: { "latitude": data.lat,
+                    "longitude": data.lon,
+                    "country": data.country,
                     "code": data.countryCode
             },
             success: function(response){

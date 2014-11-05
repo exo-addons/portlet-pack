@@ -1,9 +1,15 @@
 <style type="text/css">
-  .FavoritesApplicationTDContainer {
-    float: right!important;
-  }
   #favorites-portlet .dropdown-menu li>a {
     padding: 5px 5px 5px 9px;
+  }
+  #middle-topNavigation-container .UIRowContainer {
+    width: 95px;
+  }
+  .UIToolbarContainer #HomeLink {
+    padding: 4px 4px 0;
+  }
+  .FavoritesApplicationTDContainer {
+    float: right !important;
   }
 </style>
 <script type="text/javascript">
@@ -27,11 +33,11 @@ Favorites.prototype.init = function(jzAddFavorite, jzGetFavorites, jzDeleteFavor
 
 Favorites.prototype.overridePageTitle = function() {
   var title = document.title;
-  var $breadcrumb = jqchat("ul.breadcrumb > li.active");
+  var $breadcrumb = jQuery("ul.breadcrumb > li.active");
   if ($breadcrumb.length > 0) {
     title = $breadcrumb.html();
   }
-  $breadcrumb = jqchat("ul.breadcrumb > li.active > a");
+  $breadcrumb = jQuery("ul.breadcrumb > li.active > a");
   if ($breadcrumb.length > 0) {
     title = $breadcrumb.html();
   }
@@ -42,7 +48,7 @@ Favorites.prototype.overridePageTitle = function() {
 
 Favorites.prototype.addFavorite = function() {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzAddFavorite,
     data: {
       "title": this.currentTitle,
@@ -62,7 +68,7 @@ Favorites.prototype.addFavorite = function() {
 
 Favorites.prototype.deleteFavorite = function(uuid) {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzDeleteFavorite,
     data: {
       "uuid": uuid
@@ -81,7 +87,7 @@ Favorites.prototype.deleteFavorite = function(uuid) {
 
 Favorites.prototype.getFavorites = function(callback) {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzGetFavorites,
     dataType: "json",
     context: this,
@@ -100,15 +106,17 @@ Favorites.prototype.getFavorites = function(callback) {
 };
 
 Favorites.prototype.loadFavorites = function(idDom) {
-  var $container = jqchat(idDom);
+  var $container = jQuery(idDom);
   var html = "";
   this.getFavorites(function(myfavorites, context) {
 
     if (myfavorites.length>0) {
       for (var i=0 ; i<myfavorites.length ; i++) {
         var favorite = myfavorites[i];
-        html += "<li><a href='"+favorite.url+"' class='hover-action' style='line-height:22px;'><i class='"+context.getIcon(favorite.url)+"'></i>"+favorite.title;
-        html += "<span class='actionHover' href='#' style='float:right;display:none;'><button class='btn btn-mini btn-delete-favorite' type='button' style='font-weight: bold;vertical-align: top;' data-uuid='"+favorite.id+"'>X</button></span>";
+        var title = favorite.title;
+        if (title.length>35) title = title.substr(0, 34)+"...";
+        html += "<li><a href='"+favorite.url+"' class='hover-action' style='line-height:22px;'><i class='"+context.getIcon(favorite.url)+"'></i>"+title;
+        html += "<span class='actionHover' style='float:right;display:none;'><button class='btn btn-mini btn-delete-favorite' type='button' style='font-weight: bold;vertical-align: top;' data-uuid='"+favorite.id+"'>X</button></span>";
         html += "</a></li>";
 
       }
@@ -116,8 +124,8 @@ Favorites.prototype.loadFavorites = function(idDom) {
     }
     $container.html(html);
 
-    jqchat(".btn-delete-favorite").on("click", function(e) {
-      var uuid = $(this).attr("data-uuid");
+    jQuery(".btn-delete-favorite").on("click", function(e) {
+      var uuid = jQuery(this).attr("data-uuid");
       favorites.deleteFavorite(uuid);
       e.preventDefault();
     })
@@ -179,7 +187,7 @@ var favorites = new Favorites();
 
   });
 
-})(jqchat);
+})(jQuery);
 
 
 </script>
