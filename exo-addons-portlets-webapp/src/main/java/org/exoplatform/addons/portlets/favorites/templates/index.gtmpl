@@ -1,4 +1,8 @@
 <style type="text/css">
+  #favorites-portlet {
+    position: absolute;
+  }
+
   #favorites-portlet .dropdown-menu li>a {
     padding: 5px 5px 5px 9px;
   }
