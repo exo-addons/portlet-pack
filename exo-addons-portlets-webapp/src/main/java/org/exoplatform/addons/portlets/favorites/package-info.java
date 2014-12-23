@@ -38,7 +38,8 @@
 @Assets(
         location = AssetLocation.SERVER,
         scripts = {
-                @Script(src = "js/simpleapp.js", id = "jquery")
+                @Script(src = "js/jquery-1.8.3.min.js", id = "jquery"),
+                @Script(src = "js/favorites.js", id = "favorites", depends = "jquery")
         }
 )
 
