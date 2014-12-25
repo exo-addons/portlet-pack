@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.addons.portlets</groupId>
   <artifactId>portlet-pack</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Portlet Pack for eXo Platform 4</name>
   <description>Portlet Pack for eXo Platform 4</description>
@@ -38,7 +38,7 @@
     <connection>scm:git:git://github.com/exo-addons/portlet-pack.git</connection>
     <developerConnection>scm:git:git@github.com:exo-addons/portlet-pack.git</developerConnection>
     <url>https://github.com/exo-addons/portlet-pack</url>
-    <tag>v1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <!-- 3rd party libraries versions -->
