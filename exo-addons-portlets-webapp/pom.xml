@@ -24,7 +24,7 @@
   <parent>
     <artifactId>portlet-pack</artifactId>
     <groupId>org.exoplatform.addons.portlets</groupId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   <artifactId>exo-addons-demo-portlets-webapp</artifactId>
   <packaging>war</packaging>
