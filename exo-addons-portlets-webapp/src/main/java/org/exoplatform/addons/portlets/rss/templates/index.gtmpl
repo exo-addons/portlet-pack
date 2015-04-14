@@ -25,5 +25,5 @@
     }
 
   });
-})(jqchat);
+})(jQuery);
 </script>

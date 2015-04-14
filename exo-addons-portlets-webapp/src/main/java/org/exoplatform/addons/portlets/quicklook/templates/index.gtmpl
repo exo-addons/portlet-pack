@@ -25,7 +25,7 @@ Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetQuest
 
 Quickview.prototype.getWikiPages = function(callback) {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzGetWikiPages,
     dataType: "json",
     context: this,
@@ -45,7 +45,7 @@ Quickview.prototype.getWikiPages = function(callback) {
 
 Quickview.prototype.getForumTopics = function(callback) {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzGetForumTopics,
     dataType: "json",
     context: this,
@@ -65,7 +65,7 @@ Quickview.prototype.getForumTopics = function(callback) {
 
 Quickview.prototype.getQuestions = function(callback) {
 
-  jqchat.ajax({
+  jQuery.ajax({
     url: this.jzGetQuestions,
     dataType: "json",
     context: this,
@@ -84,7 +84,7 @@ Quickview.prototype.getQuestions = function(callback) {
 };
 Quickview.prototype.getEvents = function(callback) {
 
-    jqchat.ajax({
+  jQuery.ajax({
         url: this.jzGetEvents,
         dataType: "json",
         context: this,
@@ -205,7 +205,7 @@ var quickview = new Quickview();
 
   });
 
-})(jqchat);
+})(jQuery);
 
 
 </script>
