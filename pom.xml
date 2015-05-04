@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.addons.portlets</groupId>
   <artifactId>portlet-pack</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.1.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Portlet Pack for eXo Platform 4</name>
   <description>Portlet Pack for eXo Platform 4</description>
