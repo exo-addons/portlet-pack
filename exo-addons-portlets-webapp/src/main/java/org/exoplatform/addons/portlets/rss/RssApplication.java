@@ -62,7 +62,7 @@ public class RssApplication
   {
     String cache = portletPreferences.getValue("cache", "300");
     String url = portletPreferences.getValue("url", "");
-    indexTemplate.with().set("cache", cache).set("id", url.hashCode()).render();
+    indexTemplate.with().set("cache", cache).set("id", url.hashCode()).ok();
   }
 
   @Resource
@@ -103,7 +103,7 @@ public class RssApplication
 
     }
 
-    feedTemplate.with().set("feed", feed_).render();
+    feedTemplate.with().set("feed", feed_).ok();
 
   }
 

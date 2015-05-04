@@ -16,27 +16,32 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-@Assets(
-        location = AssetLocation.SERVER,
-        scripts = {
-                @Script(src = "js/Chart.min.js", id = "Chart"),
-                @Script(src = "js/moodtrend.js", id = "moodtrend", depends = "Chart")
 
-        },
-        stylesheets = {
-                @Stylesheet(src = "/org/exoplatform/addons/portlets/moodtrend/assets/moodtrend.css", location = AssetLocation.APPLICATION)
+@Scripts(
+        {
+                @Script(value = "js/Chart.min.js", id = "Chart",location = AssetLocation.SERVER),
+                @Script(value = "js/moodtrend.js", id = "moodtrend", depends = "Chart",location = AssetLocation.SERVER)
+
+        }
+)
+@Stylesheets(
+        {
+                @Stylesheet(value = "/org/exoplatform/addons/portlets/moodtrend/assets/moodtrend.css", location = AssetLocation.APPLICATION)
         }
 )
 @Less(value = "moodtrend.less", minify = true)
 
 
 @Application(defaultController = MoodTrendApplication.class)
-@Portlet(name="MoodTrendPortlet") package org.exoplatform.addons.portlets.moodtrend;
-
+@Portlet(name="MoodTrendPortlet")
+@Assets("*")
+package org.exoplatform.addons.portlets.moodtrend;
 import juzu.Application;
-import juzu.asset.AssetLocation;
 import juzu.plugin.asset.Assets;
+import juzu.asset.AssetLocation;
 import juzu.plugin.asset.Script;
+import juzu.plugin.asset.Scripts;
 import juzu.plugin.asset.Stylesheet;
+import juzu.plugin.asset.Stylesheets;
 import juzu.plugin.less.Less;
 import juzu.plugin.portlet.Portlet;

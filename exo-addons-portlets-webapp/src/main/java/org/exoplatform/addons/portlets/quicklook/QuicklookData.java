@@ -5,9 +5,10 @@ import juzu.SessionScoped;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
 import org.exoplatform.calendar.service.CalendarEvent;
 import org.exoplatform.calendar.service.CalendarService;
-import org.exoplatform.calendar.service.impl.JCRDataStorage;
+/**
 import org.exoplatform.faq.service.DataStorage;
 import org.exoplatform.faq.service.*;
+ **/
 import org.exoplatform.forum.common.jcr.KSDataLocation;
 import org.exoplatform.forum.common.jcr.PropertyReader;
 import org.exoplatform.forum.service.Category;
@@ -38,20 +39,24 @@ public class QuicklookData {
   WikiService wikiService_;
   KSDataLocation locator_;
   SpaceService spaceService_;
+/**
   FAQService faqService_;
+**/
   DataStorage dataStorage_;
     CalendarService calendarService_;
 
 
 
   @Inject
-  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService, FAQService faqService, DataStorage dataStorage,CalendarService calendarService)
+  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService,/** FAQService faqService,**/ DataStorage dataStorage,CalendarService calendarService)
   {
     forumService_ = forumService;
     wikiService_ = wikiService;
     locator_ = locator;
     spaceService_ = spaceService;
+/**
     faqService_ = faqService;
+ */
     dataStorage_ = dataStorage;
       calendarService_ = calendarService;
   }
@@ -114,7 +119,7 @@ public class QuicklookData {
 
     return null;
   }
-
+/**
   protected List<Question> getQuestions()
   {
 
@@ -153,6 +158,7 @@ public class QuicklookData {
     }
     return null;
   }
+**/
 
   private String getSpaceGroup()
   {

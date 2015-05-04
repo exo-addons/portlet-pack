@@ -23,7 +23,9 @@ import juzu.plugin.ajax.Ajax;
 import juzu.template.Template;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
 import org.exoplatform.calendar.service.CalendarEvent;
+/**
 import org.exoplatform.faq.service.Question;
+ */
 import org.exoplatform.forum.service.Topic;
 import org.exoplatform.portal.webui.util.Util;
 
@@ -89,7 +91,7 @@ public class Controller
 
     return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
   }
-
+/**
   @Ajax
   @Resource
   public Response.Content getQuestions()
@@ -101,6 +103,7 @@ public class Controller
 
     return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
   }
+*/
     @Ajax
     @Resource
     public Response.Content getEvents()
@@ -159,6 +162,7 @@ public class Controller
     return sforumTopics.toString();
   }
 
+/**
   private String getQuestionsToJson(List<Question> questions)
   {
     StringBuilder sQuestions = new StringBuilder();
@@ -181,6 +185,7 @@ public class Controller
     sQuestions.append("]}");
     return sQuestions.toString();
   }
+ **/
 
     private String getCalendarEventsToJson(List<CalendarEvent> events)
     {

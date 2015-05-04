@@ -15,17 +15,9 @@
   <description>Portlet Pack for eXo Platform 4</description>
   <developers>
     <developer>
-      <id>benjamin.paillereau</id>
-      <name>Benjamin Paillereau</name>
-      <email>benjamin.paillereau@exoplatform.com</email>
-      <roles>
-        <role>Owner</role>
-      </roles>
-    </developer>
-    <developer>
-      <id>esslem.ghodbane</id>
-      <name>Esslem Ghodbane</name>
-      <email>esslem.ghodbane@exoplatform.com</email>
+      <id>khemais.menzli</id>
+      <name>Khemais Menzli</name>
+      <email>khemais.menzli@exoplatform.com</email>
       <roles>
         <role>Owner</role>
       </roles>
@@ -43,9 +35,9 @@
   <properties>
     <!-- 3rd party libraries versions -->
     <commons-lang3.version>3.1</commons-lang3.version>
-    <exoplatform.version>4.0.5</exoplatform.version>
+    <exoplatform.version>4.2.0-M2</exoplatform.version>
     <javax.enterprise.cdi.version>1.0-SP4</javax.enterprise.cdi.version>
-    <juzu.version>0.6.0</juzu.version>
+    <juzu.version>1.0.0</juzu.version>
     <!-- **************************************** -->
     <!-- Jenkins Settings -->
     <!-- **************************************** -->

@@ -18,10 +18,11 @@
  */
 package org.exoplatform.addons.portlets.simpleapp;
 
-import juzu.*;
-import juzu.request.HttpContext;
+import juzu.Path;
+import juzu.Response;
+import juzu.View;
 import juzu.template.Template;
-import juzu.request.RenderContext;
+
 import javax.inject.Inject;
 import javax.portlet.PortletPreferences;
 
@@ -37,7 +38,7 @@ public class Controller
   PortletPreferences portletPreferences;
 
   @View
-  public Response.Content index(RenderContext renderContext)
+  public Response.Content index()
   {
     String id = portletPreferences.getValue("id", "");
     String title = portletPreferences.getValue("title", "");

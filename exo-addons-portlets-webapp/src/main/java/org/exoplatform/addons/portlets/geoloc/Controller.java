@@ -19,18 +19,11 @@
 package org.exoplatform.addons.portlets.geoloc;
 
 import juzu.*;
-import juzu.impl.common.Builder;
 import juzu.plugin.ajax.Ajax;
-import juzu.request.HttpContext;
-import juzu.request.ResourceContext;
 import juzu.template.Template;
-import juzu.request.RenderContext;
 import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserProfile;
-import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.social.core.profile.ProfileFilter;
-import org.exoplatform.social.core.space.spi.SpaceService;
+import org.exoplatform.web.application.RequestContext;
 
 import javax.inject.Inject;
 import javax.portlet.PortletPreferences;
@@ -65,9 +58,9 @@ public class Controller
   String code_ = "";
 
   @View
-  public Response.Content index(RenderContext renderContext)
+  public Response.Content index()
   {
-    String remoteUser = renderContext.getSecurityContext().getRemoteUser();
+    String remoteUser = RequestContext.getCurrentInstance().getRemoteUser();
     if ("".equals(code_)) {
       try {
         Map<String, String> infos = getInfos(remoteUser);
@@ -86,8 +79,8 @@ public class Controller
 
   @Ajax
   @Resource
-  public Response.Content setGeoloc(String latitude, String longitude, String country, String code, ResourceContext resourceContext) {
-    String remoteUser = resourceContext.getSecurityContext().getRemoteUser();
+  public Response.Content setGeoloc(String latitude, String longitude, String country, String code) {
+    String remoteUser = RequestContext.getCurrentInstance().getRemoteUser();
     if (code!=null && !code.equals(code_))
     {
       try {

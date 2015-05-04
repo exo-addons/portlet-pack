@@ -33,13 +33,12 @@
         }
 )
 
-@Assets(
-        location = AssetLocation.SERVER,
-        scripts = {
-                @Script(src = "js/simpleapp.js", id = "jquery")
+@Scripts(
+        {
+                @Script(value = "js/simpleapp.js", id = "jquery",location = AssetLocation.SERVER)
         }
 )
-
+@Assets("*")
 package org.exoplatform.addons.portlets.geoloc;
 
 
@@ -47,6 +46,7 @@ import juzu.Application;
 import juzu.asset.AssetLocation;
 import juzu.plugin.asset.Assets;
 import juzu.plugin.asset.Script;
+import juzu.plugin.asset.Scripts;
 import juzu.plugin.binding.Binding;
 import juzu.plugin.binding.Bindings;
 import juzu.plugin.portlet.Portlet;

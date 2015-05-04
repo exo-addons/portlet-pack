@@ -20,7 +20,6 @@ package org.exoplatform.addons.portlets.moodtrend;
 
 import juzu.Path;
 import juzu.View;
-import juzu.request.RenderContext;
 import juzu.template.Template;
 
 import javax.inject.Inject;
@@ -35,9 +34,9 @@ public class MoodTrendApplication
   Template indexTemplate;
 
   @View
-  public void index(RenderContext renderContext) throws IOException
+  public void index() throws IOException
   {
-      indexTemplate.render();
+      indexTemplate.ok();
   }
 
 }

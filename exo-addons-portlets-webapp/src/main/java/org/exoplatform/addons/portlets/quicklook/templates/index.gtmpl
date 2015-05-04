@@ -11,15 +11,13 @@
 function Quickview() {
   this.jzGetWikiPages = "";
   this.jzGetForumTopics = "";
-  this.jzGetQuestions = "";
     this.jzGetEvents = "";
 
 }
 
-Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetQuestions, jzGetEvents) {
+Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetEvents) {
   this.jzGetWikiPages = jzGetWikiPages;
   this.jzGetForumTopics = jzGetForumTopics;
-  this.jzGetQuestions = jzGetQuestions;
     this.jzGetEvents = jzGetEvents;
 };
 
@@ -63,25 +61,6 @@ Quickview.prototype.getForumTopics = function(callback) {
 
 };
 
-Quickview.prototype.getQuestions = function(callback) {
-
-  jQuery.ajax({
-    url: this.jzGetQuestions,
-    dataType: "json",
-    context: this,
-    success: function(data){
-      this.questions = data.questions;
-      console.log("you have "+this.questions.length+" questions");
-      if (typeof callback === "function") {
-        callback(this.questions, this);
-      }
-    },
-    error: function () {
-      console.log("Error when getting faq questions");
-    }
-  });
-
-};
 Quickview.prototype.getEvents = function(callback) {
 
   jQuery.ajax({
@@ -113,10 +92,9 @@ var quickview = new Quickview();
     var $quickviewApp = $("#quickview-portlet-${title}");
     var jzGetWikiPages = $quickviewApp.jzURL("Controller.getWikiPages");
     var jzGetForumTopics = $quickviewApp.jzURL("Controller.getForumTopics");
-    var jzGetQuestions = $quickviewApp.jzURL("Controller.getQuestions");
       var jzGetEvents = $quickviewApp.jzURL("Controller.getEvents");
 
-    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetQuestions, jzGetEvents );
+    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetEvents );
 
     var title = "${title}";
 
@@ -155,26 +133,6 @@ var quickview = new Quickview();
 
           }
           html += "<a class='link-right' href='"+document.location.href+"/forum'>Voir plus</a>";
-          $content.html(html);
-        }
-      });
-
-    }
-    else if (title === "FAQ") {
-
-      quickview.getQuestions(function (data){
-        console.log(data);
-        var $content = $("#quickview-content-"+title);
-
-        if (data.length>0) {
-          var html = "";
-          for (var i=0 ; i<data.length ; i++) {
-            var question = data[i];
-            html += "<li><a href='"+question.uri+"' class='hover-action' style='line-height:22px;'>"+events.titre;
-            html += "</a></li>";
-
-          }
-          html += "<a class='link-right' href='"+document.location.href+"/faq'>Voir plus</a>";
           $content.html(html);
         }
       });

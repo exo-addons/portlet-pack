@@ -2,7 +2,6 @@ package org.exoplatform.addons.portlets.moodswing;
 
 import juzu.Path;
 import juzu.View;
-import juzu.request.RenderContext;
 import juzu.template.Template;
 
 import javax.inject.Inject;
@@ -17,9 +16,9 @@ public class MoodSwingApplication
   Template indexTemplate;
 
   @View
-  public void index(RenderContext renderContext) throws IOException
+  public void index() throws IOException
   {
-      indexTemplate.render();
+      indexTemplate.ok();
   }
 
 }
