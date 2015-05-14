@@ -18,6 +18,7 @@
  */
 package org.exoplatform.addons.portlets.googleanalytics;
 
+import juzu.Response;
 import juzu.View;
 
 import java.io.IOException;
@@ -27,8 +28,9 @@ public class Controller
 {
 
    @View
-   public void index() throws IOException
+   public Response index() throws IOException
    {
+      return null;
    }
 
 }

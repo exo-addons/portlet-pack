@@ -20,6 +20,7 @@ package org.exoplatform.addons.portlets.rss;
 
 import juzu.Path;
 import juzu.Resource;
+import juzu.Response;
 import juzu.View;
 import juzu.template.Template;
 import org.exoplatform.addons.portlets.rss.model.Feed;
@@ -58,11 +59,11 @@ public class RssApplication
   PortletPreferences portletPreferences;
 
   @View
-  public void index() throws IOException
+  public Response index() throws IOException
   {
     String cache = portletPreferences.getValue("cache", "300");
     String url = portletPreferences.getValue("url", "");
-    indexTemplate.with().set("cache", cache).set("id", url.hashCode()).ok();
+    return indexTemplate.with().set("cache", cache).set("id", url.hashCode()).ok();
   }
 
   @Resource

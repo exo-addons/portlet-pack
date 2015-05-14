@@ -1,69 +1,69 @@
 <style type="text/css">
-  .quickview-box {
+.quickview-box {
     margin: 20px 20px 0 0;
-  }
-  .link-right {
+}
+        .link-right {
     float: right;
-  }
+}
 </style>
 <script type="text/javascript">
 
 function Quickview() {
-  this.jzGetWikiPages = "";
-  this.jzGetForumTopics = "";
+    this.jzGetWikiPages = "";
+    this.jzGetForumTopics = "";
     this.jzGetEvents = "";
 
 }
 
 Quickview.prototype.init = function(jzGetWikiPages, jzGetForumTopics, jzGetEvents) {
-  this.jzGetWikiPages = jzGetWikiPages;
-  this.jzGetForumTopics = jzGetForumTopics;
+    this.jzGetWikiPages = jzGetWikiPages;
+    this.jzGetForumTopics = jzGetForumTopics;
     this.jzGetEvents = jzGetEvents;
 };
 
 Quickview.prototype.getWikiPages = function(callback) {
 
-  jQuery.ajax({
-    url: this.jzGetWikiPages,
-    dataType: "json",
-    context: this,
-    success: function(data){
-      this.wikiPages = data.pages;
-      console.log("you have "+this.wikiPages.length+" pages");
-      if (typeof callback === "function") {
-        callback(this.wikiPages, this);
-      }
-    },
-    error: function () {
-      console.log("Error when getting wiki pages");
-    }
-  });
+    jQuery.ajax({
+        url: this.jzGetWikiPages,
+        dataType: "json",
+        context: this,
+        success: function(data){
+            this.wikiPages = data.pages;
+            console.log("you have "+this.wikiPages.length+" pages");
+            if (typeof callback === "function") {
+                callback(this.wikiPages, this);
+            }
+        },
+        error: function () {
+            console.log("Error when getting wiki pages");
+        }
+    });
 
 };
 
 Quickview.prototype.getForumTopics = function(callback) {
 
-  jQuery.ajax({
-    url: this.jzGetForumTopics,
-    dataType: "json",
-    context: this,
-    success: function(data){
-      this.forumTopics = data.topics;
-      console.log("you have "+this.forumTopics.length+" topics");
-      if (typeof callback === "function") {
-        callback(this.forumTopics, this);
-      }
-    },
-    error: function () {
-      console.log("Error when getting forum topics");
-    }
-  });
+    jQuery.ajax({
+        url: this.jzGetForumTopics,
+        dataType: "json",
+        context: this,
+        success: function(data){
+            this.forumTopics = data.topics;
+            console.log("you have "+this.forumTopics.length+" topics");
+            if (typeof callback === "function") {
+                callback(this.forumTopics, this);
+            }
+        },
+        error: function () {
+            console.log("Error when getting forum topics");
+        }
+    });
 
 };
 
 Quickview.prototype.getEvents = function(callback) {
 
-  jQuery.ajax({
+    jQuery.ajax({
         url: this.jzGetEvents,
         dataType: "json",
         context: this,
@@ -88,80 +88,80 @@ var quickview = new Quickview();
 (function($) {
 
 
-  $(document).ready(function() {
-    var $quickviewApp = $("#quickview-portlet-${title}");
-    var jzGetWikiPages = $quickviewApp.jzURL("Controller.getWikiPages");
-    var jzGetForumTopics = $quickviewApp.jzURL("Controller.getForumTopics");
-      var jzGetEvents = $quickviewApp.jzURL("Controller.getEvents");
+    $(document).ready(function() {
+        var $quickviewApp = $("#quickview-portlet-${title}");
+        var jzGetWikiPages = $quickviewApp.jzURL("Controller.getWikiPages");
+        var jzGetForumTopics = $quickviewApp.jzURL("Controller.getForumTopics");
+        var jzGetEvents = $quickviewApp.jzURL("Controller.getEvents");
 
-    quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetEvents );
+        quickview.init(jzGetWikiPages, jzGetForumTopics, jzGetEvents );
 
-    var title = "${title}";
+        var title = "${title}";
 
 
-    if (title === "Wiki") {
-      quickview.getWikiPages(function (data){
-        console.log(data);
-        var $content = $("#quickview-content-"+title);
+        if (title === "Wiki") {
+            quickview.getWikiPages(function (data){
+                console.log(data);
+                var $content = $("#quickview-content-"+title);
 
-        if (data.length>0) {
-          var html = "";
-          for (var i=0 ; i<data.length ; i++) {
-            var page = data[i];
-            html += "<li><a href='"+page.url+"' class='hover-action' style='line-height:22px;'>"+page.title;
-            html += "</a></li>";
+                if (data.length>0) {
+                    var html = "";
+                    for (var i=0 ; i<data.length ; i++) {
+                        var page = data[i];
+                        html += "<li><a href='"+page.url+"' class='hover-action' style='line-height:22px;'>"+page.title;
+                        html += "</a></li>";
 
-          }
-          html += "<a class='link-right' href='"+document.location.href+"/wiki'>Voir plus</a>";
-          $content.html(html);
-        }
-      });
-
-    }
-    else if (title === "Forum") {
-
-      quickview.getForumTopics(function (data){
-        console.log(data);
-        var $content = $("#quickview-content-"+title);
-
-        if (data.length>0) {
-          var html = "";
-          for (var i=0 ; i<data.length ; i++) {
-            var topic = data[i];
-            html += "<li><a href='"+topic.uri+"' class='hover-action' style='line-height:22px;'>"+topic.topicName;
-            html += "</a></li>";
-
-          }
-          html += "<a class='link-right' href='"+document.location.href+"/forum'>Voir plus</a>";
-          $content.html(html);
-        }
-      });
-
-    }
-    else if (title === "Agenda") {
-
-        quickview.getEvents(function (data){
-            console.log(data);
-            var $content = $("#quickview-content-"+title);
-
-            if (data.length>0) {
-                var html = "";
-                for (var i=0 ; i<data.length ; i++) {
-                    var events = data[i];
-                    html += "<li><a href='"+document.location.href+""+events.url+"' class='hover-action' style='line-height:22px;'>"+events.titre;
-                    html += "<span style='text-align:right;color:green;'> : "+events.from+" ==> "+events.to+"</span>";
-                    html += "</a></li>";
-
+                    }
+                    html += "<a class='link-right' href='"+document.location.href+"/wiki'>Voir plus</a>";
+                    $content.html(html);
                 }
-                html += "<a class='link-right' href='"+document.location.href+"/calendar'>Voir plus</a>";
-                $content.html(html);
-            }
-        });
+            });
 
-    }
+        }
+        else if (title === "Forum") {
+
+            quickview.getForumTopics(function (data){
+                console.log(data);
+                var $content = $("#quickview-content-"+title);
+
+                if (data.length>0) {
+                    var html = "";
+                    for (var i=0 ; i<data.length ; i++) {
+                        var topic = data[i];
+                        html += "<li><a href='"+topic.uri+"' class='hover-action' style='line-height:22px;'>"+topic.topicName;
+                        html += "</a></li>";
+
+                    }
+                    html += "<a class='link-right' href='"+document.location.href+"/forum'>Voir plus</a>";
+                    $content.html(html);
+                }
+            });
+
+        }
+        else if (title === "Agenda") {
+
+            quickview.getEvents(function (data){
+                console.log(data);
+                var $content = $("#quickview-content-"+title);
+
+                if (data.length>0) {
+                    var html = "";
+                    for (var i=0 ; i<data.length ; i++) {
+                        var events = data[i];
+                        html += "<li><a href='"+document.location.href+""+events.url+"' class='hover-action' style='line-height:22px;'>"+events.titre;
+                        html += "<span style='text-align:right;color:green;'> : "+events.from+" ==> "+events.to+"</span>";
+                        html += "</a></li>";
+
+                    }
+                    html += "<a class='link-right' href='"+document.location.href+"/calendar'>Voir plus</a>";
+                    $content.html(html);
+                }
+            });
+
+        }
 
 
-  });
+    });
 
 })(jQuery);
 
@@ -173,5 +173,5 @@ var quickview = new Quickview();
     <h6 id="quickview-title-${title}" class="title clearfix"><center>${title}</center></h6>
     <div id="quickview-content-${title}" class="uiContentBox">
     </div>
-  </div>
+</div>
 </div>

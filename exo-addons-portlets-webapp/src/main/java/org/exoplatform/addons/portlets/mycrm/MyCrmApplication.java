@@ -1,6 +1,7 @@
 package org.exoplatform.addons.portlets.mycrm;
 
 import juzu.Path;
+import juzu.Response;
 import juzu.View;
 import juzu.template.Template;
 import org.exoplatform.web.application.RequestContext;
@@ -18,10 +19,10 @@ public class MyCrmApplication {
     Template indexTemplate;
 
     @View
-    public void index() throws IOException
+    public Response index() throws IOException
     {
         String remoteUser = RequestContext.getCurrentInstance().getRemoteUser();
 
-        indexTemplate.ok();
+        return indexTemplate.ok();
     }
 }
