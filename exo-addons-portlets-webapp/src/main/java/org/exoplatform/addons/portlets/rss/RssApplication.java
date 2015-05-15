@@ -67,7 +67,7 @@ public class RssApplication
   }
 
   @Resource
-  public void getFeed() throws Exception {
+  public Response getFeed() throws Exception {
 
     String sizePref = portletPreferences.getValue("size", "5");
     String url = portletPreferences.getValue("url", "");
@@ -104,7 +104,7 @@ public class RssApplication
 
     }
 
-    feedTemplate.with().set("feed", feed_).ok();
+    return feedTemplate.with().set("feed", feed_).ok();
 
   }
 

@@ -37,7 +37,7 @@
                 @Binding(value = org.exoplatform.faq.service.DataStorage.class),
  **/
                 @Binding(value = org.exoplatform.forum.common.jcr.KSDataLocation.class),
-        @Binding(value = org.exoplatform.calendar.service.CalendarService.class)
+                @Binding(value = org.exoplatform.calendar.service.CalendarService.class)
         }
 )
 

@@ -31,35 +31,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Named("favoritesData")
+@Named("QuickData")
 @SessionScoped
 public class QuicklookData {
 
-  ForumService forumService_;
-  WikiService wikiService_;
-  KSDataLocation locator_;
-  SpaceService spaceService_;
-/**
-  FAQService faqService_;
-**/
-  DataStorage dataStorage_;
-    CalendarService calendarService_;
-
-
-
   @Inject
-  public QuicklookData(ForumService forumService, WikiService wikiService, KSDataLocation locator, SpaceService spaceService,/** FAQService faqService,**/ DataStorage dataStorage,CalendarService calendarService)
-  {
-    forumService_ = forumService;
-    wikiService_ = wikiService;
-    locator_ = locator;
-    spaceService_ = spaceService;
-/**
-    faqService_ = faqService;
- */
-    dataStorage_ = dataStorage;
-      calendarService_ = calendarService;
-  }
+  ForumService forumService_;
+  @Inject
+  WikiService wikiService_;
+  @Inject
+  KSDataLocation locator_;
+  @Inject
+  SpaceService spaceService_;
+  @Inject
+  CalendarService calendarService_;
 
   protected List<WikiPage> getWikiTopLevel()
   {
