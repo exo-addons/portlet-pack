@@ -157,7 +157,7 @@
      <portlet-preferences>
        <preference>
          <name>url</name>
-         <value>http://blog.exoplatform.com/en/feed</value>
+         <value>http://phx.corporate-ir.net/corporate.rss?c=248087&Rule=Cat=news~subcat=ALL</value>
          <read-only>false</read-only>
        </preference>
        <preference>
