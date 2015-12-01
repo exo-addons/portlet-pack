@@ -171,7 +171,6 @@ var quickview = new Quickview();
 <div id="quickview-portlet-${title}">
   <div class="quickview-box uiBox">
     <h6 id="quickview-title-${title}" class="title clearfix"><center>${title}</center></h6>
-    <div id="quickview-content-${title}" class="uiContentBox">
-    </div>
+    <div id="quickview-content-${title}" class="uiContentBox"></div>
 </div>
 </div>

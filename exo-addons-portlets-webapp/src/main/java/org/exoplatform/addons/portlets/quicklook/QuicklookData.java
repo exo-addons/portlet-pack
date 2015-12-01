@@ -5,20 +5,14 @@ import juzu.SessionScoped;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
 import org.exoplatform.calendar.service.CalendarEvent;
 import org.exoplatform.calendar.service.CalendarService;
-/**
-import org.exoplatform.faq.service.DataStorage;
-import org.exoplatform.faq.service.*;
- **/
 import org.exoplatform.forum.common.jcr.KSDataLocation;
 import org.exoplatform.forum.common.jcr.PropertyReader;
-import org.exoplatform.forum.service.Category;
 import org.exoplatform.forum.service.*;
-import org.exoplatform.forum.service.Utils;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-import org.exoplatform.wiki.mow.core.api.wiki.PageImpl;
+import org.exoplatform.wiki.mow.api.Page;
 import org.exoplatform.wiki.resolver.TitleResolver;
 import org.exoplatform.wiki.service.WikiService;
 
@@ -29,7 +23,11 @@ import javax.jcr.NodeIterator;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+/**
+ import org.exoplatform.faq.service.DataStorage;
+ import org.exoplatform.faq.service.*;
+ **/
 
 @Named("QuickData")
 @SessionScoped
@@ -46,27 +44,30 @@ public class QuicklookData {
   @Inject
   CalendarService calendarService_;
 
+
   protected List<WikiPage> getWikiTopLevel()
   {
-    PageImpl page;
+    Page page;
     String title = "Wiki Home";
     List<WikiPage> wikiPages = new ArrayList<WikiPage>();
 
     try
     {
 //      System.out.println("SpaceGroup: *"+getSpaceGroup()+"*");
-      page = (PageImpl) wikiService_.getPageById(PortalConfig.GROUP_TYPE, getSpaceGroup(), TitleResolver.getId(title, false));
+      page = wikiService_.getPageOfWikiByName(PortalConfig.GROUP_TYPE, getSpaceGroup(), TitleResolver.getId(title, false));
 
-      Map<String, PageImpl> childPages = page.getChildPages();
+//      Map<String, PageImpl> childPages = page.getChildPages();
+      List<Page> childrenPages = wikiService_.getChildrenPageOf(page);
 
-      for (PageImpl child:childPages.values())
+
+      for (Page child:childrenPages)
       {
 
         WikiPage wikiPage = new WikiPage();
         wikiPage.setAuthor(child.getAuthor());
         wikiPage.setTitle(child.getTitle());
         wikiPage.setName(child.getName());
-        wikiPage.setURL(child.getURL());
+        wikiPage.setURL(child.getUrl());
 
         wikiPages.add(wikiPage);
 
@@ -81,6 +82,8 @@ public class QuicklookData {
     return wikiPages;
 
   }
+
+
 
   protected List<Topic> getForumTopics()
   {
@@ -104,6 +107,8 @@ public class QuicklookData {
 
     return null;
   }
+
+
 /**
   protected List<Question> getQuestions()
   {
@@ -143,7 +148,7 @@ public class QuicklookData {
     }
     return null;
   }
-**/
+*/
 
   private String getSpaceGroup()
   {
@@ -218,6 +223,7 @@ public class QuicklookData {
 
     return null;
   }
+
     protected List<CalendarEvent> getEvents() {
 
         List<CalendarEvent> calendarEvents = null;

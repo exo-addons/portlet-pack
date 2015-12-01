@@ -23,19 +23,19 @@ import juzu.plugin.ajax.Ajax;
 import juzu.template.Template;
 import org.exoplatform.addons.portlets.quicklook.model.WikiPage;
 import org.exoplatform.calendar.service.CalendarEvent;
-/**
-import org.exoplatform.faq.service.Question;
- */
 import org.exoplatform.forum.service.Topic;
 import org.exoplatform.portal.webui.util.Util;
 
 import javax.inject.Inject;
 import javax.portlet.PortletPreferences;
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+/**
+ import org.exoplatform.faq.service.Question;
+ */
 
 /** @author <a href="mailto:benjamin.paillereau@exoplatform.com">Benjamin Paillereau</a> */
 @SessionScoped
@@ -45,10 +45,8 @@ public class Controller
   @Inject
   @Path("index.gtmpl")
   Template indexTemplate;
-
   @Inject
   QuicklookData quicklookData_;
-
   @Inject
   PortletPreferences portletPreferences;
 
@@ -76,6 +74,7 @@ public class Controller
 //    System.out.println(jsonFav);
 
     return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
+
   }
 
   @Ajax
@@ -90,6 +89,8 @@ public class Controller
 //    System.out.println(jsonFav);
 
     return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
+
+
   }
 /**
   @Ajax
@@ -114,6 +115,7 @@ public class Controller
         String jsonEvents = getCalendarEventsToJson(events);
 
         return Response.ok(jsonEvents).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
+
     }
 
 
