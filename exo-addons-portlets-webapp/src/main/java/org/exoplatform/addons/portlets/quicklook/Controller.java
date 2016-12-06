@@ -92,19 +92,7 @@ public class Controller
 
 
   }
-/**
-  @Ajax
-  @Resource
-  public Response.Content getQuestions()
-  {
 
-    List<Question> questions = quicklookData_.getQuestions();
-
-    String jsonFav = getQuestionsToJson(questions);
-
-    return Response.ok(jsonFav).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
-  }
-*/
     @Ajax
     @Resource
     public Response.Content getEvents()
